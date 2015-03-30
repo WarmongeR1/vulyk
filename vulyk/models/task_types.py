@@ -36,6 +36,10 @@ class AbstractTaskType(object):
     helptext_template = ""
     type_name = ""
 
+    readable_name = ""
+    description = ""
+    logo = ""
+
     redundancy = 3
     JS_ASSETS = []
     CSS_ASSETS = []
