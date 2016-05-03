@@ -90,8 +90,8 @@ def load(task_type, path, batch):
                    'Passing __all__ will export all tasks of a given type')
 @click.option('--export-all', 'export_all', default=False, is_flag=True)
 def export(task_type, path, batch, export_all):
-    """Exports answers on closed tasks to json."""
-    _db.export_tasks(TASKS_TYPES[task_type], path, batch, not export_all)
+    """Exports answers to chosen tasks to json."""
+    _db.export_reports(TASKS_TYPES[task_type], path, batch, not export_all)
 # endregion DB (export/import)
 
 # region Group
