@@ -21,7 +21,7 @@ test_requirements = requirements
 
 setup(
     name='vulyk',
-    version='0.3.1',
+    version='0.3.2',
     description='Crowdsourcing platform for different kinds of tasks',
     long_description=readme + '\n\n' + history,
     author='Dmytro Hambal',

@@ -58,6 +58,8 @@ JS_ASSETS = ['vendor/jquery/jquery.js',
              'vendor/jquery.hotkeys/jquery.hotkeys.js',
              'vendor/jquery.magnific-popup/jquery.magnific-popup.js',
              'scripts/base.js']
+JS_ASSETS_ADDITIONAL = ENV('JS_ASSETS_ADDITIONAL', [])
+
 JS_ASSETS_OUTPUT = ENV('JS_ASSETS_OUTPUT', 'scripts/packed.js')
 
 JS_ASSETS_FILTERS = ENV('JS_ASSETS_FILTERS', 'yui_js')
@@ -65,6 +67,10 @@ JS_ASSETS_FILTERS = ENV('JS_ASSETS_FILTERS', 'yui_js')
 CSS_ASSETS = ['vendor/bootstrap/bootstrap.css',
               'vendor/jquery.magnific-popup/jquery.magnific-popup.css',
               'styles/style.css']
+CSS_ASSETS_ADDITIONAL = ENV('CSS_ASSETS_ADDITIONAL', [])
+
+TEMPLATE_BASE_FOLDERS = []
+
 CSS_ASSETS_OUTPUT = ENV('CSS_ASSETS_OUTPUT', 'styles/packed.css')
 CSS_ASSETS_FILTERS = ENV('CSS_ASSETS_FILTERS', 'yui_css')
 # static files for plugin X get stored in COLLECT_STATIC_ROOT/plugin_X/static
@@ -80,6 +86,12 @@ ENABLED_TASKS = ENV('ENABLED_TASKS', {})
 
 SITE_NAME = 'Vulyk workspace'
 SITE_MOTTO = 'Vulyk: crowdsourcing platform'
+SITE_LOGO = ENV('SITE_LOGO', '/static/images/logo.png')
+SITE_TITLE = ENV('SITE_TITLE', u'Канцелярская сотня представляет!')
+
+LANGUAGE = ENV('LANGUAGE', 'ua')  # 'ua' or 'ru'
+
+THANKS_TASK_MESSAGE = u'Спасибо за помощь, сознательный гражданин!'
 
 DEFAULT_BATCH = 'default'
 

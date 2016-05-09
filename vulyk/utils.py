@@ -1,5 +1,6 @@
 # -*- coding=utf-8 -*-
 from __future__ import unicode_literals
+
 import httplib
 import sys
 from functools import wraps
@@ -86,3 +87,11 @@ def get_tb():
     :return: traceback of the most recent exception
     """
     return sys.exc_info()[2]
+
+
+def get_template_path(app, name):
+    for x in iter(app.jinja_loader.list_templates()):
+        for folder in iter(app.config['TEMPLATE_BASE_FOLDERS']):
+            if folder and '%s/base/%s' % (folder, name) == x:
+                return x
+    return "base/%s" % name

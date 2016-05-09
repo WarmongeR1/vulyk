@@ -11,7 +11,7 @@ from vulyk import cli
 from vulyk.assets import init as assets_init
 from vulyk.tasks import init_tasks
 from vulyk.users import init_social_login
-from vulyk.utils import resolve_task_type
+from vulyk.utils import resolve_task_type, get_template_path
 
 app = Flask(__name__)
 app.config.from_object('vulyk.settings')
@@ -22,6 +22,11 @@ assets_init(app)
 init_social_login(app, db)
 
 TASKS_TYPES = init_tasks(app)
+
+
+@app.template_filter('app_template')
+def app_template_filter(s):
+    return get_template_path(app, s)
 
 
 @app.context_processor
@@ -84,7 +89,8 @@ def index():
     if len(task_types) == 1:
         return redirect(url_for('task_home', type_name=task_types[0]['type']))
 
-    return render_template('index.html', task_types=task_types)
+    return render_template(get_template_path(app, 'index.html'),
+                           task_types=task_types)
 
 
 @app.route('/logout', methods=['POST'])
@@ -96,7 +102,7 @@ def logout():
 
 @app.route('/type/<string:type_name>/next', methods=['GET'])
 @login.login_required
-def next(type_name):
+def next_page(type_name):
     """
     Provides next available task for user.
     If user isn't eligible for that type of tasks - an exception
@@ -137,7 +143,8 @@ def task_home(type_name):
     if task_type is None:
         abort(httplib.NOT_FOUND)
 
-    return render_template('task.html', task_type=task_type)
+    return render_template(get_template_path(app, 'task.html'),
+                           task_type=task_type)
 
 
 @app.route('/type/<string:type_name>/leaders', methods=['GET'])
@@ -153,7 +160,7 @@ def leaders(type_name):
         abort(httplib.NOT_FOUND)
 
     return render_template(
-        'leaderboard.html',
+        get_template_path(app, 'leaderboard.html'),
         task_type=task_type,
         leaders=task_type.get_leaderboard())
 

@@ -1,5 +1,6 @@
 # -*- coding=utf-8 -*-
 from __future__ import unicode_literals
+
 import os.path
 
 import jinja2
@@ -38,6 +39,11 @@ def init_tasks(app):
         loaders[task_instance.type_name] = jinja2.PackageLoader(plugin)
         task_types[task_instance.type_name] = task_instance(settings=settings)
 
+        # Explain:
+        # for example
+        # str(plugin_instance) == <module 'vulyk_test' from '/home/user/vulyk_project/vulyk-test/vulyk_test/__init__.pyc'>
+        # str(plugin_instance.__path__) == ['/home/user/vulyk_project/vulyk-test/vulyk_test/']
+        # str(plugin_instance.__path__) == '/home/user/vulyk_project/vulyk-test/vulyk_test/'
         default_static_path = plugin_instance.__path__[0]
         # if Flask-Collect is enabled - get files from collected dir
         if 'COLLECT_STATIC_ROOT' in app.config:
@@ -77,9 +83,8 @@ def init_tasks(app):
             app.assets.register(css_name, css)
 
     app.jinja_loader = jinja2.ChoiceLoader([
+        jinja2.PrefixLoader(loaders),
         app.jinja_loader,
-        jinja2.PrefixLoader(loaders)])
-
+    ])
     app._plugin_files_to_watch = files_to_watch
-
     return task_types
