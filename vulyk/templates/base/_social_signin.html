@@ -19,4 +19,7 @@
                href="{{ url_for('social.auth', backend='vk-oauth2') }}"
                title="VK.com">VK.com</a></li>
     {% endif %}
+    {% if config.SOCIAL_AUTH_GITHUB_KEY %}
+        <li><a class="github" href="{{ url_for('social.auth', backend='github') }}" title="Github.com">Github.com</a></li>
+    {% endif %}
 </ul>
