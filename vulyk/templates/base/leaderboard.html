@@ -42,4 +42,10 @@
 {% endblock task %}
 
 
+{% block extra_css %}
+    {% assets "plugin_css_" + task_type.type_name %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+    {% endassets %}
+{% endblock %}
+
 
