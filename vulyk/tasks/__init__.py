@@ -23,7 +23,7 @@ def init_tasks(app):
     enabled_tasks = app.config.get('ENABLED_TASKS', {})
     files_to_watch = []
 
-    for plugin, task in enabled_tasks.iteritems():
+    for plugin, task in enabled_tasks.items():
         task_settings = import_string(
             '{plugin_name}.settings'.format(plugin_name=plugin)
         )
