@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import gzip
-from itertools import imap, ifilter
+from six.moves import map as imap
+from six.moves import filter as ifilter
 import os
 
 from click import echo
