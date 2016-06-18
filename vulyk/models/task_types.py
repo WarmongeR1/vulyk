@@ -7,7 +7,7 @@ from hashlib import sha1
 import logging
 import random
 import six
-import ujson as json
+import json
 
 from mongoengine import Q
 from mongoengine.errors import (
@@ -81,8 +81,9 @@ class AbstractTaskType(object):
 
         try:
             for task in tasks:
+                data = json.dumps(task).encode('utf-8')
                 self.task_model.objects.create(
-                    id=sha1(json.dumps(task)).hexdigest()[:20],
+                    id=sha1(data).hexdigest()[:20],
                     batch=batch,
                     task_type=self.type_name,
                     task_data=task,
