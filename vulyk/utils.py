@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 from __future__ import unicode_literals
 
-import httplib
+from six.moves import http_client as httplib
 import sys
 from functools import wraps
 from itertools import islice

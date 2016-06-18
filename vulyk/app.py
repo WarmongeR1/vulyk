@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import httplib
-import ujson as json
+from six.moves import http_client as httplib
 
+import json
 from flask import (Flask, render_template, redirect, url_for, g, request,
                    Response, abort)
 from flask.ext import login
